@@ -1,14 +1,12 @@
-
-
 <template>
   <TheWelcome/>
   <div class="login">
-    <h2>Login</h2>
+    <h2 class="text-login">Login</h2>
     <form @submit.prevent="login">
       <div class="form-group">
         <label for="username">Username:</label>
         <input type="text" id="username" v-model="loginData.username" required>
-        <div v-if="loginData.username.length > 50" class="error">Password melebihi 50 karakter.</div>
+        <div v-if="loginData.username.length > 50" class="error">Username melebihi 50 karakter.</div>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
@@ -17,7 +15,8 @@
       </div>
       <button type="submit">Login</button>
     </form>
-    <router-link to="/register">Belum Punya Akun ?</router-link>
+    <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
+    <router-link to="/register" class="buttonRegister">Belum Punya Akun ?</router-link>
   </div>
 </template>
 
@@ -30,7 +29,8 @@ export default {
       loginData:{
         username: '',
         password: ''
-      }
+      },
+      errorMessage: ''
     };
   },
   methods: {
@@ -45,14 +45,14 @@ export default {
         .then(response => response.json())
         .then(data => {
           console.log(data);
-          // mengarahkan halaman login kedalam halaman dashboard
-           if (data.message === "LOGIN SUCCESS") {
-           this.$router.push({path: "/dashboard", replace : true})
-           this.$router.replace({path: "/dashboard"})
+          if (data.message === "LOGIN SUCCESS") {
+            this.$router.push({path: "/dashboard", replace : true})
+            this.$router.replace({path: "/dashboard"})
+          } else {
+            this.errorMessage = "Akun tidak ditemukan atau tidak sesuai"; // Menetapkan pesan kesalahan
           }
         })
         .catch(error => {
-          // Tangani kesalahan jika terjadi
           console.error(error);
         });
     }
@@ -72,6 +72,12 @@ export default {
   margin: 0 auto;
   padding: 20px;
 }
+
+.text-login{
+  text-align: center;
+  
+}
+
 
 .form-group {
   margin-bottom: 10px;
@@ -103,16 +109,12 @@ button:hover {
 }
 
 .buttonRegister {
-  padding: 10px 20px;
-  background-color: yellow;
-  color: blue;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .buttonRegister:hover{
-  background-color: blue;
+  background-color: lightblue;
 }
 </style>
-
