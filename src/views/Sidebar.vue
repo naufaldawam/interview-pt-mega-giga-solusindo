@@ -1,32 +1,28 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-lg-3">
-        <div class="profile-section">
-          <div class="profile-image">
-            <img src="@/assets/profile-icon.png" alt="profile-image" />
-          </div>
-          <div class="name-users">
-            users
+      <div class="profile-section">
+        <div class="profile-image">
+          <img src="@/assets/profile-icon.png" alt="profile-image" />
+        </div>
+        <div class="name-users">
+          users
+        </div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-border">
+          <div class="menu-container">
+            <button class="menu-button">
+              Menu
+            </button>
+            <a class="item" :class="{active: isActive === 0}" href="#">Barang</a>
+            <a class="item" href="#">Supplier</a>
           </div>
         </div>
       </div>
-      <div class="col-lg-9">
-        <div class="menu-section">
-          <div class="menu-border">
-            <div class="menu-container">
-              <button class="menu-button">
-                Menu
-              </button>
-                <a class="item" :class="{active: isActive === 0}" href="#">Barang</a>
-                <a class="item" href="#">Supplier</a>
-            </div>
-          </div>
-        </div>
-        <div class="status-section">
-          <div class="status-online">
-            <span>Status Online</span>
-          </div>
+      <div class="status-section">
+        <div class="status-online">
+          <span>Status Online</span>
         </div>
       </div>
     </div>
@@ -96,7 +92,6 @@ export default {
   z-index: 30;
 }
 
-
 .item {
   display: block;
   padding: 5px 10px;
@@ -112,6 +107,7 @@ export default {
 .active {
   color: blue;
 }
+
 .status-section {
   text-align: center;
 }
@@ -123,7 +119,7 @@ export default {
   border-radius: 5px;
 }
 
-.name-users{
+.name-users {
   text-align: center;
   color: green;
 }
