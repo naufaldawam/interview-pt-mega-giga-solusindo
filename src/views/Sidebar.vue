@@ -1,29 +1,27 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="profile-section">
-        <div class="profile-image">
-          <img src="@/assets/profile-icon.png" alt="profile-image" />
-        </div>
-        <div class="name-users">
-          users
+    <div class="profile-section">
+      <div class="profile-image">
+        <img src="@/assets/profile-icon.png" alt="profile-image" />
+      </div>
+      <div class="name-users">
+        users
+      </div>
+    </div>
+    <div class="menu-section">
+      <div class="menu-border">
+        <div class="menu-container">
+          <button class="menu-button">
+            Menu
+          </button>
+          <a class="item" :class="{active: isActive === 0}" href="#">Barang</a>
+          <a class="item" href="#">Supplier</a>
         </div>
       </div>
-      <div class="menu-section">
-        <div class="menu-border">
-          <div class="menu-container">
-            <button class="menu-button">
-              Menu
-            </button>
-            <a class="item" :class="{active: isActive === 0}" href="#">Barang</a>
-            <a class="item" href="#">Supplier</a>
-          </div>
-        </div>
-      </div>
-      <div class="status-section">
-        <div class="status-online">
-          <span>Status Online</span>
-        </div>
+    </div>
+    <div class="status-section">
+      <div class="status-online">
+        <span>Status Online</span>
       </div>
     </div>
   </div>
@@ -39,13 +37,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .container {
   padding-top: 20px;
 }
 
 .profile-section {
   margin-bottom: 20px;
+  border: 2px solid lightblue;
+  padding: 10px;
 }
 
 .profile-image {
@@ -75,15 +75,15 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 12rem;
 }
 
 .menu-button {
-  background-color: transparent;
+  background-color: lightblue;
   border: none;
   outline: none;
   cursor: pointer;
   min-width: 100%;
+  color: blue;
 }
 
 .menu-section,
@@ -113,14 +113,15 @@ export default {
 }
 
 .status-online {
-  background-color: green;
-  color: white;
+  background-color: lightblue;
+  color: blue;
   padding: 10px;
   border-radius: 5px;
 }
 
 .name-users {
   text-align: center;
-  color: green;
+  color: blue;
+  background-color: lightblue;
 }
 </style>
