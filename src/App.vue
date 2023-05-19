@@ -24,7 +24,6 @@ import Footer from './views/Footer.vue'
 
 .footer {
   background-color: #f8f8f8;
-  padding: 0.5em;
   margin-top: auto;
   text-align: center;
 }
