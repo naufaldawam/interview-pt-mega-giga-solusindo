@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-navbar">
     <a class="navbar-brand" href="#">
-      marketplace
-      <img src="@/assets/logo-sinau.png" alt="Logo Sinau Besar" />
+      MARKETPLACE
+      <img src="@/assets/new-logo-sinau-no-bg.png" alt="Logo Sinau No Background" />
     </a>
     <button
       class="navbar-toggler"
@@ -22,7 +22,7 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-auto">
           <router-link to="/" class="nav-link">Logout</router-link>
         </li>
       </ul>
@@ -48,10 +48,16 @@ export default {
 
 <style scoped>
 img {
-  height: 100px;
   width: 100px;
 }
 
+.bg-light{
+  background-color: lightblue !important;
+}
+
+.navbar-brand{
+  color: blue !important;
+}
 
 .sticky-navbar {
   position: sticky;
@@ -63,6 +69,4 @@ img {
   display: block !important;
 }
 
-/* Add custom styles here if needed */
 </style>
-` b 
