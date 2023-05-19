@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-navbar">
     <a class="navbar-brand" href="#">
       MARKETPLACE
-      <img src="@/assets/new-logo-sinau-no-bg.png" alt="Logo Sinau No Background" />
+      <img src="@/assets/new-logo-sinau-no-bg.png" alt="Logo Sinau Besar" />
     </a>
     <button
       class="navbar-toggler"
