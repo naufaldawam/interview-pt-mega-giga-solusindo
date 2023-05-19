@@ -5,7 +5,7 @@
         <img src="@/assets/profile-icon.png" alt="profile-image" />
       </div>
       <div class="name-users">
-        users
+        {{ userName }}
       </div>
     </div>
     <div class="menu-section">
@@ -32,7 +32,32 @@ export default {
   data() {
     return {
       isActive: 0,
+      userName: '',
     };
+  },
+  created() {
+    this.fetchUserName();
+  },
+  methods: {
+    fetchUserName() {
+      fetch('http://159.223.57.121:8090/api/users', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.length > 0) {
+            this.userName = data[0].name;
+          }
+            console.log(data)
+          
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
   },
 };
 </script>
