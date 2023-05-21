@@ -12,10 +12,6 @@
   <div class="content">
     <!-- start of content -->
     <h2>Dashboard</h2>
-    <div class="user-info">
-      <h3>Informasi User</h3>
-      <p>Profile Name: {{ userInfo.profileName }}</p>
-    </div>
     <div class="menu">
       <h3>Menu</h3>
       <ul>
