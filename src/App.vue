@@ -2,11 +2,21 @@
 import { RouterLink, RouterView } from 'vue-router'
 // import HelloWorld from './components/HelloWorld.vue'
 import Footer from './views/Footer.vue'
+import Header from './views/Header.vue'
 </script>
 
 <template>
-  <div class="app">
+
+
+    <div class="app">
+       <div v-if="$route.path == '/supplierpage' || $route.path == '/barangpage'">
+      <div class="header">
+        <Header/>
+      </div>
+    </div>
+
     <RouterView />
+
     <div class="footer">
       <Footer />
     </div>
@@ -28,7 +38,12 @@ import Footer from './views/Footer.vue'
   text-align: center;
 }
 
-header {
+.footer {
+  margin-top: top;
+}
+
+
+/*header {
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -88,5 +103,5 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
-}
+}*/
 </style>

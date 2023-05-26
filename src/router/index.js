@@ -6,11 +6,22 @@ import Register from '../views/Register.vue'
 import Header from '../views/Header.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Footer from '../views/Footer.vue'
-
+import SupplierPage from '../views/Supplier.vue'
+import BarangPage from '../views/Barang.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/supplierpage',
+      name: 'supplierpage',
+      component: SupplierPage,
+    },
+    {
+      path: '/barangpage',
+      name: 'barangpage',
+      component: BarangPage,
+    },
       {
       path: '/wellcomepage',
       name: 'wellcomepage',

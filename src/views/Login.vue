@@ -44,8 +44,13 @@ export default {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data);
+          console.log('ini hasil datanya:', data);
+          console.log('ini token :' ,data.token);
           if (data.message === "LOGIN SUCCESS") {
+            localStorage.setItem('token', data.token);
+            // console.log(localStorage.setItem);
+            console.log(localStorage.getItem('token'));
+
             this.$router.push({path: "/dashboard", replace : true})
             this.$router.replace({path: "/dashboard"})
           } else {

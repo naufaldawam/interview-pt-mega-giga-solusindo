@@ -3,39 +3,26 @@
   <!-- start of header -->
   <Header />
   <!-- end of header -->
+  
+
+
   <div class="dashboard">
+  
   <!-- start of sidebar  -->
   <div class="sidebar">
     <Sidebar />
   </div>
   <!-- end of sidebar -->
+  
+
+  <!-- start of content -->
   <div class="content">
-    <!-- start of content -->
-    <h2>Dashboard</h2>
-    <div class="menu">
-      <h3>Menu</h3>
-      <ul>
-        <li>Barang</li>
-        <li>Supplier</li>
-      </ul>
-    </div>
-    <div class="list">
-      <h3>List Barang</h3>
-      <ul>
-        <li v-for="item in barangList" :key="item.id">{{ item.name }}</li>
-      </ul>
-    </div>
-    <div class="list">
-      <h3>List Supplier</h3>
-      <ul>
-        <li v-for="item in supplierList" :key="item.id">{{ item.name }}</li>
-      </ul>
-    </div>
-    <div class="pagination">
-      <h3>Pagination</h3>
-    </div>
+
+    <h2>hello welcome back</h2>
+  
   </div>
-    <!-- end of content dashboard -->
+  <!-- end of content dashboard -->
+
   </div>
 </template>
 
