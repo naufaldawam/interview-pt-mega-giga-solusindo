@@ -5,7 +5,6 @@
         <img src="@/assets/profile-icon.png" alt="profile-image" />
       </div>
       <div class="name-users">
-        ini nanti nama user yang di ambil dari generate token
         {{ userName }}
       </div>
     </div>
@@ -57,12 +56,28 @@
 </template>
 
 <script>
+import axios from 'axios';
+
+///pakai query string karna butuh string
+function queryStringify(params) {
+  const keyValuePairs = [];
+
+  for (const key in params) {
+    if (params.hasOwnProperty(key)) {
+      const value = params[key];
+      keyValuePairs.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+    }
+  }
+
+  return keyValuePairs.join('&');
+}
+
 export default {
   data() {
     return {
       isActive: 0,
       userName: '',
-      activeMenu:'',
+      activeMenu: '',
     };
   },
   created() {
@@ -74,26 +89,47 @@ export default {
       this.setActiveMenu(to.path);
     },
   },
+
   methods: {
     fetchUserName() {
-      fetch('http://159.223.57.121:8090/api/users', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.length > 0) {
-            this.userName = data[0].name;
-          }
-            console.log(data)
-          
+      const token = localStorage.getItem('token');
+      // console.log('Token:', token);
+
+      // Decode token payload
+      const payload = token.split('.')[1];
+      const decodedPayload = atob(payload);
+      const { sub: username } = JSON.parse(decodedPayload);
+      const ambilDataUsername = username;
+
+      // console.log("payload: ", payload);
+      // console.log("decode payload: ", JSON.stringify(decodedPayload) );
+      // console.log("decode payload: ", decodedPayload );
+      // console.log("ambil data username :", ambilDataUsername);
+      const queryParams = queryStringify({
+        username: username,
+        // username: 'gita',//tar ganti jan lupa buat get accountnya
+      });
+
+      const url = `http://159.223.57.121:8090/users/find-by-username?${queryParams}`;
+
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         })
-        .catch(error => {
+        .then(response => {
+          const coba = response.data;
+          // console.log("coba:",coba.data.username);
+          if (response.data != null) {
+            this.userName = coba.data.username;
+          }
+        })
+        .catch((error) => {
           console.error(error);
         });
-    },
+    }
+      ,
       setActiveMenu(path) {
         if (path === '/dashboard') {
           this.activeMenu = 'dashboard';
@@ -104,31 +140,33 @@ export default {
         } else {
           this.activeMenu = '';
         }
-    },
+      },
       navigateToDashboard() {
         if (this.$route.path === '/dashboard') {
           alert('Anda sudah berada di halaman yang dituju.');
         } else {
           this.$router.push('/dashboard');
         }
-    },
+      },
       navigateToSupplier() {
         if (this.$route.path === '/supplierpage') {
           alert('Anda sudah berada di halaman yang dituju.');
         } else {
           this.$router.push('/supplierpage');
         }
-    },
+      },
       navigateToBarang() {
         if (this.$route.path === '/barangpage') {
           alert('Anda sudah berada di halaman yang dituju.');
         } else {
           this.$router.push('/barangpage');
         }
+      },
     },
-  },
-};
+  };
+
 </script>
+  
 
 <style>
 .container {

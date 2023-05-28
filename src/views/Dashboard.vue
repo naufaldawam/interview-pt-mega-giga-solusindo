@@ -56,10 +56,6 @@ export default {
       // Set header Authorization dengan token
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      // Mengambil data Informasi User
-      const userInfoResponse = await axios.get('http://159.223.57.121:8090/user-info');
-      this.userInfo = userInfoResponse.data;
-
       // Mengambil data List Barang
       const barangResponse = await axios.get('http://159.223.57.121:8090/barang');
       this.barangList = barangResponse.data;

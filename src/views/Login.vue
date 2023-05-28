@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import TheWelcome from '../views/WellcomePage.vue'
+import axios from 'axios'
 
 export default {
   data() {
@@ -35,33 +35,30 @@ export default {
   },
   methods: {
     login() {
-      fetch('http://159.223.57.121:8090/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(this.loginData),
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('ini hasil datanya:', data);
-          console.log('ini token :' ,data.token);
-          if (data.message === "LOGIN SUCCESS") {
-            localStorage.setItem('token', data.token);
+      axios.post('http://159.223.57.121:8090/auth/login', this.loginData)
+        .then(response => {
+          const data = response.data;
+          console.log('ini data body:', JSON.stringify(this.loginData));
+          console.log('ini data:', JSON.stringify(data));
+          console.log('Ini hasil datanya:', data);
+          console.log('Ini token:', data.token);
+          if (data.message === 'LOGIN SUCCESS') {
+            const username = data.data.username; // Mengambil nilai data.id
+            console.log('User ID:', username);
+            localStorage.setItem('token', data.data.token);
             // console.log(localStorage.setItem);
             console.log(localStorage.getItem('token'));
-
-            this.$router.push({path: "/dashboard", replace : true})
-            this.$router.replace({path: "/dashboard"})
+            this.$router.push({ path: '/dashboard', replace: true });
+            this.$router.replace({ path: '/dashboard' });
           } else {
-            this.errorMessage = "Akun tidak ditemukan atau tidak sesuai"; // Menetapkan pesan kesalahan
+            this.errorMessage = 'Akun tidak ditemukan atau tidak sesuai';
           }
         })
         .catch(error => {
           console.error(error);
         });
-    }
-  }
+          }
+        }
 };
 </script>
 
