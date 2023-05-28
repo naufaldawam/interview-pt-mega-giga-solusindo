@@ -49,7 +49,7 @@
     </div>
     <div class="status-section">
       <div class="status-online">
-        <span>Status Online</span>
+        <span>Status: {{ isOnline ? 'Online' : 'Offline' }}</span>
       </div>
     </div>
   </div>
@@ -98,7 +98,7 @@ export default {
       // Decode token payload
       const payload = token.split('.')[1];
       const decodedPayload = atob(payload);
-      const { sub: username } = JSON.parse(decodedPayload);
+      const { sub: username , exp: expirationTime} = JSON.parse(decodedPayload);
       const ambilDataUsername = username;
 
       // console.log("payload: ", payload);
@@ -123,6 +123,15 @@ export default {
           // console.log("coba:",coba.data.username);
           if (response.data != null) {
             this.userName = coba.data.username;
+            // create status token jika masih valid
+            const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+            // jika valid tampilkan status onlinenya
+            // if (currentTime < expirationTime) {
+            //   console.log('Status: Online');
+            // } else {
+            //   console.log('Status: Offline');
+            // }
+            this.isOnline = currentTime < expirationTime;
           }
         })
         .catch((error) => {
