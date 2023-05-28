@@ -13,7 +13,34 @@
   <div class="content">
 
     <h2>Supplier Page</h2>
-  
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Kolom 1</th>
+              <th>Kolom 2</th>
+              <th>Kolom 3</th>
+              <th>Kolom 4</th>
+              <th>Kolom 5</th>
+              <th>Kolom 6</th>
+              <th>Kolom 7</th>
+              <th>Kolom 8</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in 8" :key="row">
+              <td>Data {{ row }} - Kolom 1</td>
+              <td>Data {{ row }} - Kolom 2</td>
+              <td>Data {{ row }} - Kolom 3</td>
+              <td>Data {{ row }} - Kolom 4</td>
+              <td>Data {{ row }} - Kolom 5</td>
+              <td>Data {{ row }} - Kolom 6</td>
+              <td>Data {{ row }} - Kolom 7</td>
+              <td>Data {{ row }} - Kolom 8</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
   </div>
 </div>
 </template>
@@ -50,23 +77,4 @@ export default {
   padding: 20px;
 }
 
-.user-info {
-  margin-bottom: 20px;
-}
-
-.menu {
-  margin-bottom: 20px;
-}
-
-.list {
-  margin-bottom: 20px;
-}
-
-.status {
-  margin-bottom: 20px;
-}
-
-.pagination {
-  margin-bottom: 20px;
-}
 </style>

@@ -47,11 +47,21 @@
         </div>
       </div>
     </div>
-    <div class="status-section">
-      <div class="status-online">
-        <span>Status: {{ isOnline ? 'Online' : 'Offline' }}</span>
+    <div class="menu-section">
+      <div class="menu-border">
+        <div class="menu-container">
+          <span class="status-online">{{ isOnline ? 'Online' : 'Offline' }}</span>
+          <span v-if="isOnline" class="font-size: small">Hari Online: {{ onlineSince }}</span>
+          <span v-if="isOnline" class="font-size: small">Waktu Online: {{ onlineDuration }}</span>
+        </div>
       </div>
     </div>
+    <!-- <div class="status-section">
+      <div class="status-online">
+        <span>Status: {{ isOnline ? 'Online' : 'Offline' }}</span>
+        <span v-if="isOnline">Sejak: {{ onlineSince }}</span>
+        <span v-if="isOnline">Durasi Online: {{ onlineDuration }}</span></div>
+    </div> -->
   </div>
 </template>
 
@@ -98,8 +108,8 @@ export default {
       // Decode token payload
       const payload = token.split('.')[1];
       const decodedPayload = atob(payload);
-      const { sub: username , exp: expirationTime} = JSON.parse(decodedPayload);
-      const ambilDataUsername = username;
+      const { sub: username , exp: expirationTime, iat: issuedAtTime} = JSON.parse(decodedPayload);
+      // const ambilDataUsername = username;
 
       // console.log("payload: ", payload);
       // console.log("decode payload: ", JSON.stringify(decodedPayload) );
@@ -132,13 +142,42 @@ export default {
             //   console.log('Status: Offline');
             // }
             this.isOnline = currentTime < expirationTime;
+            if (this.isOnline) {
+              const loginTime = new Date(issuedAtTime * 1000); // Convert to milliseconds
+              const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+              //ambil waktu login dengan format yy-mm-dd              
+              const year = loginTime.getFullYear();
+              const month = String(loginTime.getMonth() + 1).padStart(2, '0');
+              const day = String(loginTime.getDate()).padStart(2, '0');
+              this.onlineSince = `${year}-${month}-${day}`;
+              //ambil waktu dia login dari jam berapa
+              const loginHour = loginTime.getHours();
+              const loginMinute = loginTime.getMinutes();
+              const loginSecond = loginTime.getSeconds();
+              this.onlineDuration = `${loginHour.toString().padStart(2, '0')}:${loginMinute.toString().padStart(2, '0')}:${loginSecond.toString().padStart(2, '0')}`;
+            }
           }
         })
         .catch((error) => {
           console.error(error);
         });
-    }
-      ,
+      },
+      formatDuration(durationInSeconds) {
+        const hours = Math.floor(durationInSeconds / 3600);
+        const minutes = Math.floor((durationInSeconds % 3600) / 60);
+        const seconds = durationInSeconds % 60;
+
+        let durationString = '';
+        if (hours > 0) {
+          durationString += `${hours} jam `;
+        }
+        if (minutes > 0) {
+          durationString += `${minutes} menit `;
+        }
+        durationString += `${seconds} detik`;
+
+        return durationString;
+      },
       setActiveMenu(path) {
         if (path === '/dashboard') {
           this.activeMenu = 'dashboard';
@@ -273,4 +312,7 @@ export default {
   background-color: lightblue;
 }
 
+.span-menu{
+
+}
 </style>
