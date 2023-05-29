@@ -5,7 +5,7 @@
         <img src="@/assets/profile-icon.png" alt="profile-image" />
       </div>
       <div class="name-users">
-        {{ userName }}
+        Hello "{{ userName }}"
       </div>
     </div>
     <div class="menu-section">

@@ -38,16 +38,16 @@ export default {
       axios.post('http://159.223.57.121:8090/auth/login', this.loginData)
         .then(response => {
           const data = response.data;
-          console.log('ini data body:', JSON.stringify(this.loginData));
-          console.log('ini data:', JSON.stringify(data));
-          console.log('Ini hasil datanya:', data);
-          console.log('Ini token:', data.token);
+          // console.log('ini data body:', JSON.stringify(this.loginData));
+          // console.log('ini data:', JSON.stringify(data));
+          // console.log('Ini hasil datanya:', data);
+          // console.log('Ini token:', data.token);
           if (data.message === 'LOGIN SUCCESS') {
             const username = data.data.username; // Mengambil nilai data.id
-            console.log('User ID:', username);
+            // console.log('User ID:', username);
             localStorage.setItem('token', data.data.token);
             // console.log(localStorage.setItem);
-            console.log(localStorage.getItem('token'));
+            // console.log(localStorage.getItem('token'));
             this.$router.push({ path: '/dashboard', replace: true });
             this.$router.replace({ path: '/dashboard' });
           } else {

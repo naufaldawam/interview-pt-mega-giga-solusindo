@@ -9,7 +9,7 @@ import Header from './views/Header.vue'
 
 
     <div class="app">
-       <div v-if="$route.path == '/supplierpage' || $route.path == '/barangpage'">
+       <div v-if="$route.path == '/supplierpage' || $route.path == '/barangpage' ||  $route.path == '/addbarang' ||   $route.path == '/updatebarang' ">
       <div class="header">
         <Header/>
       </div>

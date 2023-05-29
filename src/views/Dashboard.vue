@@ -39,44 +39,8 @@ export default {
     Header,
     Sidebar
   },
-  data() {
-    return {
-      userInfo: {},
-      barangList: [],
-      supplierList: [],
-      isOnline: false
-    };
-  },
   methods: {
-  async fetchData() {
-    try {
-      // Ambil token dari penyimpanan lokal
-      const token = localStorage.getItem('token');
-      
-      // Set header Authorization dengan token
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-      // Mengambil data List Barang
-      const barangResponse = await axios.get('http://159.223.57.121:8090/barang');
-      this.barangList = barangResponse.data;
-      console.log(barangResponse)
-
-      // Mengambil data List Supplier
-      const supplierResponse = await axios.get('http://159.223.57.121:8090/supplier');
-      this.supplierList = supplierResponse.data;
-
-      // Mengambil data Status Online
-      const statusResponse = await axios.get('http://159.223.57.121:8090/status');
-      this.isOnline = statusResponse.data.isOnline;
-    } catch (error) {
-      console.error(error);
-    }
-  }
   },
-  mounted() {
-    // Panggil method fetchData() saat komponen di-mount
-    this.fetchData();
-  }
 };
 </script>
 

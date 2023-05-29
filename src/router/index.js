@@ -7,11 +7,23 @@ import Header from '../views/Header.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Footer from '../views/Footer.vue'
 import SupplierPage from '../views/Supplier.vue'
-import BarangPage from '../views/Barang.vue'
+import BarangPage from '../views/BarangPage.vue'
+import AddBarang from '../views/AddBarang.vue'
+import UpdateBarang from '../views/UpdateBarang.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/updatebarang',
+      name: 'updatebarang',
+      component: UpdateBarang,
+    },
+    {
+      path: '/addbarang',
+      name: 'addbarang',
+      component: AddBarang,
+    },
     {
       path: '/supplierpage',
       name: 'supplierpage',
