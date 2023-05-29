@@ -42,7 +42,7 @@
               <td>
                 <div class="action-button">
                   <button class="btn btn-danger btn-sm" @click="hapusBarang(barang)">Hapus</button>
-                  <button class="btn btn-warning btn-sm" @click="openUpdateModal(barang)">Update</button>  
+                  <button class="btn btn-warning btn-sm" @click="fiturProgressUpdate">Update</button>  
                   <!-- <router-link to="#" class="btn btn-warning btn-sm">Update Barang</router-link> -->
                 </div>
               </td>
@@ -51,6 +51,10 @@
         </table>
         <div v-if="showSuccessDeleted" class="success-popup">
           <p>Data berhasil dihapus!</p>
+        </div>
+        <div v-if="fiturUpdate" class="success-popup">
+          <p>fitur masih dalam tahap pengembangan</p>
+          <button @click="confirmPopUpClose">OK</button>
         </div>
       </div>
 
@@ -102,6 +106,7 @@ export default {
         }
       },
       showSuccessDeleted: false,
+      fiturUpdate: false,
     };
   },
   mounted() {
@@ -214,6 +219,13 @@ export default {
         .catch(error => {
           console.error(error);
         });
+    },
+    fiturProgressUpdate(){
+      this.fiturUpdate = true;
+    },
+    confirmPopUpClose(){
+      this.fiturUpdate = false;
+      window.location.reload();
     },
 
 
