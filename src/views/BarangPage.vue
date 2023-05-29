@@ -49,6 +49,9 @@
             </tr>
           </tbody>
         </table>
+        <div v-if="showSuccessDeleted" class="success-popup">
+          <p>Data berhasil dihapus!</p>
+        </div>
       </div>
 
       <!-- start modal -->
@@ -98,6 +101,7 @@ export default {
           noTelp: ''
         }
       },
+      showSuccessDeleted: false,
     };
   },
   mounted() {
@@ -138,17 +142,23 @@ export default {
         const token = localStorage.getItem('token');
         const url = `http://159.223.57.121:8090/barang/delete/${id}`;
 
-        axios
+             axios
           .delete(url, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           })
           .then(response => {
-            console.log('Barang berhasil dihapus:', response.data);
+            this.showSuccessDeleted = true;
+            setTimeout(() => {
+              this.showSuccessDeleted = false;
+              window.location.reload();
+            }, 2000);
+            // console.log('Barang berhasil dihapus:', response.data);
             const index = this.dataBarang.indexOf(barang);
             if (index !== -1) {
-              this.dataBarang.splice(index, 1); // Menghapus barang dari daftar
+              this.dataBarang.splice(index, 1);
+
             }
           })
           .catch(error => {
@@ -180,7 +190,7 @@ export default {
           namaSupplier: '',
           alamat: '',
           noTelp: ''
-        }
+        },
       };
     },
     updateBarang() {
@@ -261,6 +271,18 @@ export default {
   margin-right: 20px;
 }
 
-
+.success-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: green ;
+  color: white;
+}
 
 </style>

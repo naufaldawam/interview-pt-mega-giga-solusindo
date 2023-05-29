@@ -1,19 +1,15 @@
-<!-- import header -->
 <template>
-<div class="addbarangPage">
-  
-  <!-- start of sidebar  -->
-  <div class="sidebar">
-    <Sidebar />
-  </div>
-  <!-- end of sidebar -->
-  
+  <div class="addbarangPage">
+    <!-- start of sidebar  -->
+    <div class="sidebar">
+      <Sidebar />
+    </div>
+    <!-- end of sidebar -->
 
-  <!-- start of content -->
-  <div class="content">
-
-    <h2>Menu Tambah Barang</h2>
-      <router-link to="/barangpage" class="btn btn-primary">kembali ke menu sebelumnya</router-link>
+    <!-- start of content -->
+    <div class="content">
+      <h2>Menu Tambah Barang</h2>
+      <router-link to="/barangpage" class="btn btn-primary">Kembali ke Menu Sebelumnya</router-link>
       <form @submit.prevent="tambahBarang">
         <div>
           <label for="namaBarang">Nama Barang:</label>
@@ -43,16 +39,19 @@
           <button type="submit" class="btn btn-primary">Tambah Barang</button>
         </div>
       </form>
-
+      <div v-if="showSuccessPopup" class="success-popup">
+        <p>Data berhasil ditambahkan!</p>
+        <p>Kembali ke halaman barang</p>
+      </div>
+    </div>
+    <!-- end of content -->
   </div>
-</div>
 </template>
 
 <script>
 import Sidebar from '@/views/Sidebar.vue';
 import axios from 'axios';
 
-///pakai query string karna butuh string
 function queryStringify(params) {
   const keyValuePairs = [];
 
@@ -73,10 +72,6 @@ export default {
   },
   data() {
     return {
-      dataBarang: []
-    };
-  },  data() {
-    return {
       formData: {
         namaBarang: '',
         harga: 0,
@@ -86,7 +81,8 @@ export default {
           noTelp: '',
           alamat: ''
         }
-      }
+      },
+      showSuccessPopup: false
     };
   },
   methods: {
@@ -102,11 +98,11 @@ export default {
         })
         .then(response => {
           const data = response.data;
-          console.log('response data:', data);
-
-          // Lakukan tindakan setelah berhasil menambahkan barang
-          // Misalnya, tampilkan pesan sukses atau lakukan navigasi ke halaman lain
-
+          // console.log('response data:', data);
+          this.showSuccessPopup = true;
+          setTimeout(() => {
+            this.$router.push('/barangpage');
+          }, 2000);
         })
         .catch(error => {
           console.error(error);
@@ -114,12 +110,9 @@ export default {
     }
   }
 };
-
-
 </script>
 
 <style scoped>
-
 .addbarangPage {
   display: flex;
   justify-content: center;
@@ -127,37 +120,43 @@ export default {
 
 .content {
   width: 100%;
-  /*max-width: 800px;*/
+  max-width: 800px;
   margin: 0 auto;
-  /*padding: 20px;*/
+  padding: 20px;
 }
 
-.table-container {
-  overflow-x: auto;
+.content h2 {
+  margin-bottom: 20px;
 }
 
-.table {
+form {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
   width: 100%;
-  border-collapse: collapse;
-}
-
-.table th,
-.table td {
   padding: 10px;
-  text-align: left;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-@media screen and (max-width: 768px) {
-  .table th,
-  .table td {
-    white-space: nowrap;
-  }
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-
-.action-button{
-  display: flex;
-  gap: 5px;
+.button {
+  margin-top: 20px;
 }
 
 .sidebar {
@@ -166,6 +165,17 @@ export default {
   margin-right: 20px;
 }
 
-
-
+.success-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: green ;
+  color: white;
+}
 </style>
