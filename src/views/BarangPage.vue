@@ -13,8 +13,10 @@
   <div class="content">
 
     <h2>Barang Page</h2>
-    <div>
-      <router-link to="/addbarang" class="btn btn-primary">Tambah Barang</router-link>
+    <div class="button-down-header">
+      <router-link to="/addbarang" class="btn btn-primary btn-sm btn-1">Tambah Barang</router-link>
+      <button class="btn btn-warning btn-sm btn-2" @click="fiturProgressUpdate">Unduh Data PDF</button>
+      <button class="btn btn-warning btn-sm" @click="fiturProgressUpdate">Unduh Data Excell</button>
     </div>
       <div class="table-container">
         <table class="table" :data="dataBarang">
@@ -115,11 +117,11 @@ export default {
   methods: {
     fetchDataBarang() {
       const token = localStorage.getItem('token');
-      const payload = token.split('.')[1];
-      const decodedPayload = atob(payload);
-      const { sub: username } = JSON.parse(decodedPayload);
+      // const payload = token.split('.')[1];
+      // const decodedPayload = atob(payload);
+      // const { sub: username } = JSON.parse(decodedPayload);
       const queryParams = queryStringify({
-        username: username,
+        // username: username,
         limit: 20,
         offset: 1
       });
@@ -225,7 +227,7 @@ export default {
     },
     confirmPopUpClose(){
       this.fiturUpdate = false;
-      window.location.reload();
+      // window.location.reload();
     },
 
 
@@ -240,6 +242,12 @@ export default {
 .barangpage {
   display: flex;
   justify-content: center;
+}
+
+.sidebar {
+  flex: 0 0 auto;
+  width: 200px;
+  margin-right: 20px;
 }
 
 .content {
@@ -277,11 +285,6 @@ export default {
   gap: 5px;
 }
 
-.sidebar {
-  flex: 0 0 auto;
-  width: 200px;
-  margin-right: 20px;
-}
 
 .success-popup {
   position: fixed;
@@ -296,5 +299,16 @@ export default {
   background-color: green ;
   color: white;
 }
+
+.button-down-header{
+  text-align: end;
+}
+.btn-1{
+  margin-right: 10px;
+}
+.btn-2{
+  margin-right: 10px;
+}
+
 
 </style>
