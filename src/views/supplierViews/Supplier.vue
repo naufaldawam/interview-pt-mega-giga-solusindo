@@ -15,8 +15,8 @@
       <div class="button-down-header">
         <!-- <router-link to="/addbarang" class="btn btn-primary">Tambah Barang</router-link> -->
         <button class="btn btn-primary btn-sm btn-1 " @click="fiturProgressUpdate">Tambah Supplier</button>  
-        <button class="btn btn-warning btn-sm btn-2" @click="fiturProgressUpdate">Unduh Data PDF</button>
-        <button class="btn btn-warning btn-sm" @click="fiturProgressUpdate">Unduh Data Excell</button>
+        <button class="btn btn-warning btn-sm btn-2" @click="downloadDataPDF">Unduh Data PDF</button>
+        <button class="btn btn-warning btn-sm" @click="downloadDataExcell">Unduh Data Excell</button>
       </div>
       <div>
       </div>
@@ -61,6 +61,9 @@
 <script>
 import Sidebar from '@/views/contentViews/Sidebar.vue';
 import axios from 'axios';
+//import file untuk disimpan
+import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
 
 function queryStringify(params) {
   const keyValuePairs = [];
@@ -136,10 +139,56 @@ export default {
       this.fiturUpdate = false;
     },
     downloadDataPDF() {
-      
+    const token = localStorage.getItem('token');
+    const url = 'http://159.223.57.121:8090/supplier/find-all?limit=20&offset=1';
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        const data = response.data;
+        const jsonData = JSON.stringify(data);
+        // console.log("Json data : ",jsonData);
+        const doc = new jsPDF();
+        doc.text(jsonData, 10, 10);
+        doc.save('unduh-data-supplier-marketplace-sianu-koding-naufal.pdf');
+      })
+      .catch(error => {
+        console.error(error);
+      });
     },
     downloadDataExcell() {
-      
+    const token = localStorage.getItem('token');
+    const url = 'http://159.223.57.121:8090/supplier/find-all?limit=5&offset=1';
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        const data = response.data;
+        // console.log("data :",data);
+        const worksheet = XLSX.utils.json_to_sheet(data.data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Data Supplier');
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+        const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'unduh-data-supplier-marketplace-sianu-koding-naufal.xlsx';
+        link.click();
+
+        URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error(error);
+      });
     },
 
 
