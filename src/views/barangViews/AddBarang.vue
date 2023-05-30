@@ -1,12 +1,6 @@
 <template>
   <div class="addbarangPage">
-    <!-- start of sidebar  -->
-    <div class="sidebar">
-      <Sidebar />
-    </div>
-    <!-- end of sidebar -->
-
-    <!-- start of content -->
+    <!-- start of add barang -->
     <div class="content">
       <h2>Menu Tambah Barang</h2>
       <router-link to="/barangpage" class="btn btn-primary">Kembali ke Menu Sebelumnya</router-link>
@@ -44,12 +38,12 @@
         <p>Kembali ke halaman barang</p>
       </div>
     </div>
-    <!-- end of content -->
+    <!-- end of add barang -->
   </div>
 </template>
 
 <script>
-import Sidebar from '@/views/Sidebar.vue';
+import Sidebar from '@/views/contentViews/Sidebar.vue';
 import axios from 'axios';
 
 function queryStringify(params) {

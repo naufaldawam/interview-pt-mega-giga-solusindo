@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import Sidebar from '@/views/Sidebar.vue';
+import Sidebar from '@/views/contentViews/Sidebar.vue';
 import axios from 'axios';
 
 function queryStringify(params) {

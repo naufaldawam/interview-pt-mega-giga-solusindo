@@ -1,25 +1,25 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 // import HelloWorld from './components/HelloWorld.vue'
-import Footer from './views/Footer.vue'
-import Header from './views/Header.vue'
+import Footer from './views/contentViews/Footer.vue'
+import Header from './views/contentViews/Header.vue'
 </script>
 
 <template>
 
 
     <div class="app">
-       <div v-if="$route.path == '/supplierpage' || $route.path == '/barangpage' ||  $route.path == '/addbarang' ||   $route.path == '/updatebarang' ">
-      <div class="header">
-        <Header/>
+      <div v-if="$route.path == '/supplierpage' || $route.path == '/barangpage' ||  $route.path == '/addbarang' ||   $route.path == '/updatebarang' ">
+        <div class="header">
+          <Header/>
+        </div>
       </div>
-    </div>
 
-    <RouterView />
+      <RouterView />
 
-    <div class="footer">
-      <Footer />
-    </div>
+      <div class="footer">
+        <Footer />
+      </div>
   </div>
   
 </template>

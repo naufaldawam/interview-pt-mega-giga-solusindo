@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import Header from '@/views/Header.vue';
-import Sidebar from '@/views/Sidebar.vue';
+import Header from '@/views/contentViews/Header.vue';
+import Sidebar from '@/views/contentViews/Sidebar.vue';
 import 'bootstrap';
 import axios from 'axios';
 

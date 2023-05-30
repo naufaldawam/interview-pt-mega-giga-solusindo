@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import Sidebar from '@/views/Sidebar.vue';
+import Sidebar from '@/views/contentViews/Sidebar.vue';
 import axios from 'axios';
 
 ///pakai query string karna butuh string
